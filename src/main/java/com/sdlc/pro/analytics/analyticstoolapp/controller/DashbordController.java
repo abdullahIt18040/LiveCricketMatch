@@ -33,8 +33,11 @@ public class DashbordController {
 private MatchEventHandler matchEventHandler;
     @Autowired
     RequestRepository requestRepository;
-
-
+@GetMapping("/dashbord")
+public String dashbord()
+{
+    return "wellcome";
+}
 
     @GetMapping("/cricket-match")
     public String cricketMatch()
