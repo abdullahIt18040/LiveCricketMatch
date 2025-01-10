@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cricket match </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+<body>
+<h1> <span id="team1">_</span>  VS <span id="team2"> _</span></h1>
+
+<h1> Run : <span id="run"> _ </span></h1>
+<h1> over : <span id="over"> _ </span></h1>
+<h1> Wicket : <span id="wicket"> _ </span></h1>
+
+<script>
+function fetchMatchUpdate(){
+const  eventSource=new EventSource("/analytics/get-matchUpdate");
+eventSource.addEventListener("cricket",function (event){
+    console.log(event);
+    const  data = JSON.parse(event.data) ;
+    $("#team1").text(data["team1"]);
+    $("#team2").text(data["team2"]);
+    $("#run").text(data["run"]);
+    $("#over").text(data["over"]);
+    $("#wicket").text(data["wicket"]);
+    }
+);
+    // eventSource.addEventListener("football",function (event){
+    //         console.log(event);
+    //         console.log(event.data)
+    //         const  data = JSON.parse(event.data) ;
+    //         $("#team1").text(data["team1"]);
+    //         $("#team2").text(data["team2"]);
+    //         $("#goal1").text(data["goal1"]);
+    //         $("#goal2").text(data["goal2"]);
+    //         $("#time").text(data["time"]);
+    //     }
+    // );
+
+
+
+}
+
+fetchMatchUpdate();
+</script>
+
+</body>
+</html>
